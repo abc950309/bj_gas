@@ -44,18 +44,18 @@ bj_gas:
 ## 传感器
 包含的传感器
 
-| entity_id 形式                          | 含义             | 属性                                                         | 备注              |
-| --------------------------------------- | ---------------- | ------------------------------------------------------------ | ----------------- |
-| sensor.XXXXXXXXXXX_balance              | 燃气费余额       | last_update - 网端数据更新时间                               |                   |
-| sensor.XXXXXXXXXXX_current_level        | 当前用气阶梯     |                                                              |                   |
-| sensor.XXXXXXXXXXX_current_level_remain | 当前阶梯剩余额度 |                                                              |                   |
-| sensor.XXXXXXXXXXX_current_price        | 当前气价         |                                                              |                   |
-| sensor.XXXXXXXXXXX_year_consume         | 本年度用气量     |                                                              |                   |
-| sensor.XXXXXXXXXXX_month_reg_qty        | 本月用气量       |                                                              |                   |
-| sensor.XXXXXXXXXXX_battery_voltage      | 气表电量         |                                                              |                   |
-| sensor.XXXXXXXXXXX_mtr_status           | 阀门状态         |                                                              |                   |
-| sensor.XXXXXXXXXXX_monthly_*            | 月度用气情况   | name - 月份<br/>state - 用气量<br />consume_bill - 该月燃气费 | \*取值为1-12<br/> |
-| sensor.XXXXXXXXXX_daily_*               | 最近一周用气     | name - 日期<br/>state - 用气量                               | \*取值为1-7       |
+| entity_id 形式                              | 含义             | 属性                                                          | 备注              |
+| ------------------------------------------- | ---------------- | ------------------------------------------------------------- | ----------------- |
+| sensor.gas_XXXXXXXXXXX_balance              | 燃气费余额       | last_update - 网端数据更新时间                                |                   |
+| sensor.gas_XXXXXXXXXXX_current_level        | 当前用气阶梯     |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_current_level_remain | 当前阶梯剩余额度 |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_current_price        | 当前气价         |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_year_consume         | 本年度用气量     |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_month_reg_qty        | 本月用气量       |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_battery_voltage      | 气表电量         |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_mtr_status           | 阀门状态         |                                                               |                   |
+| sensor.gas_XXXXXXXXXXX_monthly_*            | 月度用气情况     | name - 月份<br/>state - 用气量<br />consume_bill - 该月燃气费 | \*取值为1-12<br/> |
+| sensor.gas_XXXXXXXXXXX_daily_*              | 最近一周用气     | name - 日期<br/>state - 用气量                                | \*取值为1-7       |
 
 其中 XXXXXXXXXXX 为北京燃气用户户号
 
@@ -67,19 +67,19 @@ type: vertical-stack
 cards:
   - type: entities
     entities:
-      - entity: sensor.XXXXXXXXXXX_balance
-      - entity: sensor.XXXXXXXXXXX_month_reg_qty
-      - entity: sensor.XXXXXXXXXXX_current_level
-      - entity: sensor.XXXXXXXXXXX_current_level_remain
-      - entity: sensor.XXXXXXXXXXX_current_price
-      - entity: sensor.XXXXXXXXXXX_year_consume
-      - entity: sensor.XXXXXXXXXXX_battery_voltage
-      - entity: sensor.XXXXXXXXXXX_mtr_status
+      - entity: sensor.gas_XXXXXXXXXXX_balance
+      - entity: sensor.gas_XXXXXXXXXXX_month_reg_qty
+      - entity: sensor.gas_XXXXXXXXXXX_current_level
+      - entity: sensor.gas_XXXXXXXXXXX_current_level_remain
+      - entity: sensor.gas_XXXXXXXXXXX_current_price
+      - entity: sensor.gas_XXXXXXXXXXX_year_consume
+      - entity: sensor.gas_XXXXXXXXXXX_battery_voltage
+      - entity: sensor.gas_XXXXXXXXXXX_mtr_status
     title: 燃气信息
   - type: custom:flex-table-card
     title: 月度用气情况
     entities:
-      include: sensor.XXXXXXXXXXX_monthly_*
+      include: sensor.gas_XXXXXXXXXXX_monthly_*
     columns:
       - name: 月份
         data: name
@@ -90,7 +90,7 @@ cards:
   - type: custom:flex-table-card
     title: 最近一周用气情况
     entities:
-      include: sensor.XXXXXXXXXXX_daily_*
+      include: sensor.gas_XXXXXXXXXXX_daily_*
     columns:
       - name: 日期
         data: name
